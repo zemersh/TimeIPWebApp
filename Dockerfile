@@ -2,6 +2,9 @@ FROM node:latest
 
 COPY . /usr/share/TimeIPWebApp/
 
-CMD ["/bin/bash", "-c", "sh /usr/share/TimeIPWebApp/startup.sh"]
+WORKDIR /usr/share/TimeIPWebApp/
 
 EXPOSE 8090
+
+CMD [ "node", "app.js"]
+
