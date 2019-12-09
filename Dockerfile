@@ -1,6 +1,6 @@
 FROM node:latest
 
-COPY ./geoserver-2.15.1 /usr/share/TimeIPWebApp
+COPY ./* /usr/share/TimeIPWebApp
 
 CMD ["/bin/bash", "-c", "sh node app.js"]
 
