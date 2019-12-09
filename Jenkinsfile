@@ -1,7 +1,7 @@
 pipeline {
 	agent any
 	
-	tools {nodejs "nodejs"}
+	tools {docker "docker"}
 	
 	options {
 		timestamps ()
@@ -10,13 +10,6 @@ pipeline {
 		stage ('Git - Checkout') {
 			steps {
 				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/zemersh/TimeIPWebApp.git']]]) 
-			}
-		}
-		stage ('Unit test') {
-			steps {
-				sh 'cd $WORKSPACE'
-				sh 'npm install'
-				sh 'npm test'
 			}
 		}
 		stage ('Build TimeIPWebApp Image') {
