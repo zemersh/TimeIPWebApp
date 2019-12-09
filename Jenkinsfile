@@ -12,6 +12,7 @@ pipeline {
 		stage ('Unit test') {
 			steps {
 				sh 'cd $WORKSPACE'
+				sh 'npm install'
 				sh 'npm test'
 			}
 		}
