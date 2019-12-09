@@ -19,5 +19,11 @@ pipeline {
 				sh 'npm test'
 			}
 		}
+		stage ('Build TimeIPWebApp Image') {
+			steps {
+				sh 'cd $WORKSPACE'
+				sh 'docker build . --tag forcepoint/time-ip-web-app:latest'
+			}
+		}
 	}	
 }
