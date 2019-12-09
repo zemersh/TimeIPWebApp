@@ -25,7 +25,7 @@ pipeline {
 			steps {
 				sshPublisher(publishers: [sshPublisherDesc(configName: 'dockercentos', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 
 				'''
-				sh '/home/zemersh/docker/jenkins/jenkins_home/workspace/TimeIPWebApp/'
+				sh 'cd /home/zemersh/docker/jenkins/jenkins_home/workspace/TimeIPWebApp/'
 				sh 'pwd'
 				sh 'docker build . --tag forcepoint/time-ip-web-app'
 				'''
