@@ -1,5 +1,8 @@
 pipeline {
 	agent any
+	
+	tools {nodejs "nodejs"}
+	
 	options {
 		timestamps ()
 	}
@@ -12,10 +15,8 @@ pipeline {
 		stage ('Unit test') {
 			steps {
 				sh 'cd $WORKSPACE'
-				nodejs('nodejs12.13.1'){
-					npm install
-					npm test
-				}
+				npm install
+				npm test
 			}
 		}
 	}	
