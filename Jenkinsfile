@@ -17,7 +17,7 @@ pipeline {
 				sh 'cd $WORKSPACE'
 				sh 'npm install'
 				sh 'npm test'
-				sh 'mocha test --reporter mocha-junit-reporter --reporter-options mochaFile=./JUnitsReports/result.xml'
+				sh './node_modules/mocha/bin/mocha --reporter mocha-junit-reporter --reporter-options mochaFile=./test/reports/file.xml'
 				junit '**/JUnitsReports/*.xml'
 			}
 		}
