@@ -22,10 +22,8 @@ pipeline {
 		stage ('Build TimeIPWebApp Image') {
 			agent {
 				dockerfile {
-					filename 'Dockerfile.build'
-					dir 'build'
-					additionalBuildArgs  '--build-arg version=1.0.2'
-					args '-v /tmp:/tmp'
+					filename 'Dockerfile'
+					additionalBuildArgs  '--tag forcepoint/time-ip-web-app'
 				}
 			}
 			steps {
