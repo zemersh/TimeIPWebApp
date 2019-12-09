@@ -1,6 +1,6 @@
 FROM node:latest
 
-COPY ./* /usr/share/TimeIPWebApp
+COPY ./* /usr/share/TimeIPWebApp/
 
 CMD ["/bin/bash", "-c", "sh node app.js"]
 
