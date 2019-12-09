@@ -12,8 +12,10 @@ pipeline {
 		stage ('Unit test') {
 			steps {
 				sh 'cd $WORKSPACE'
-				sh 'npm install'
-				sh 'npm test'
+				nodejs('nodejs12.13.1'){
+					npm install
+					npm run prod
+				}
 			}
 		}
 	}	
