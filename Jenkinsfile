@@ -14,7 +14,7 @@ pipeline {
 				sh 'cd $WORKSPACE'
 				nodejs('nodejs12.13.1'){
 					npm install
-					npm run prod
+					npm test
 				}
 			}
 		}
