@@ -9,11 +9,19 @@ pipeline {
 				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/zemersh/TimeIPWebApp.git']]]) 
 			}
 		}
-		stage ('Copy Artifacts') {
+		stage ('Unit test') {
 			steps {
-				powershell '''
-				Write-Host "ROBOCOPY is about to start copying Navy artifacts for Advanced Installer build" -NoNewLine
-				'''
+				mocha/chai + report
+			}
+		}
+		stage ('Build Image') {
+			steps {
+				dockerfile
+			}
+		}
+		stage ('Kubernetes deploy') {
+			steps {
+				dockerfile
 			}
 		}
 	}	

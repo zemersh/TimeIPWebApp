@@ -6,7 +6,16 @@
     "keywords": [],
     "author": "",
     "license": "ISC",
+    "scripts": {
+        "test": "mocha"
+    },
     "dependencies": {
-        "express": "^4.16.4"
+        "chai": "^4.2.0",
+        "express": "^4.16.4",
+        "mocha": "^6.2.2",
+        "mocha-junit-reporter": "^1.23.1"
+    },
+    "devDependencies": {
+        "request": "^2.88.0"
     }
 }
