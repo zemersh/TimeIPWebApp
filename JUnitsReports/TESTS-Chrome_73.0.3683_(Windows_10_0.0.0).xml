@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<testsuite name="Chrome 73.0.3683 (Windows 10 0.0.0)" package="" timestamp="2019-04-21T14:24:20" id="0" hostname="ZEMERSPC" tests="3" errors="0" failures="0" time="0.23">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36"/>
+  </properties>
+  <testcase name="AppComponent should create the app" time="0.148" classname="Chrome_73_0_3683_(Windows_10_0_0_0).AppComponent"/>
+  <testcase name="AppComponent should have as title 'Connect Four'" time="0.07" classname="Chrome_73_0_3683_(Windows_10_0_0_0).AppComponent"/>
+  <testcase name="ConnectFourService should be created" time="0.012" classname="Chrome_73_0_3683_(Windows_10_0_0_0).ConnectFourService"/>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>

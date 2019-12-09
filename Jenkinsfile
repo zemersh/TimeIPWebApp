@@ -17,7 +17,8 @@ pipeline {
 				sh 'cd $WORKSPACE'
 				sh 'npm install'
 				sh 'npm test'
-				sh 'mocha test --reporter mocha-junit-reporter --reporter-options mochaFile=./test/reports/result.xml'
+				sh 'mocha test --reporter mocha-junit-reporter --reporter-options mochaFile=./JUnitsReports/result.xml'
+				junit '**/JUnitsReports/*.xml'
 			}
 		}
 		stage ('Build TimeIPWebApp Image') {
