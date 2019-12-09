@@ -20,8 +20,6 @@ pipeline {
 			}
 		}
 		stage ('Build TimeIPWebApp Image') {
-			def dockerHome = tool 'docker'
-			env.PATH = "${dockerHome}/bin:${env.PATH}"
 			steps {
 				sh 'cd $WORKSPACE'
 				sh 'docker build . --tag forcepoint/time-ip-web-app'
