@@ -21,8 +21,8 @@ pipeline {
 		}
 		stage ('Build TimeIPWebApp Image') {
 			steps {
-				agent { dockerfile true }
 				sh 'cd $WORKSPACE'
+				sh 'docker build . --tag forcepoint/time-ip-web-app'
 			}
 		}
 	}	
