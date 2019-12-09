@@ -15,8 +15,8 @@ pipeline {
 		stage ('Unit test') {
 			steps {
 				sh 'cd $WORKSPACE'
-				npm install
-				npm test
+				sh 'npm install'
+				sh 'npm test'
 			}
 		}
 	}	
