@@ -21,8 +21,8 @@ pipeline {
 		}
 		stage ('Build TimeIPWebApp Image') {
 			steps {
+				agent { dockerfile true }
 				sh 'cd $WORKSPACE'
-				def testImage = docker.build("forcepoint/time-ip-web-app:latest")
 			}
 		}
 	}	
