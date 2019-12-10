@@ -23,16 +23,15 @@ pipeline {
 		}
 		stage ('Create Artifactory and sending it to management server') {
 			steps {
-				sh '$BUILD_VERSION = node -pe "require('./package.json').version"'
-				sh 'echo $BUILD_VERSION'
-				sh 'echo $BUILD_TIMESTAMP'
 				sshPublisher(publishers: [sshPublisherDesc(configName: 'dockercentos', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 
 				'''
+				cd /home/zemersh/docker/jenkins/jenkins_home/workspace/TimeIPWebApp
+				BUILD_VERSION=$(node -pe "require('./package.json').version")
 				cd /home/zemersh/docker/jenkins/jenkins_home/workspace/
-				echo $BUILD_VERSION
 				echo $BUILD_TIMESTAMP
-				#!bin/sh
-				FILE="TimeIPWebApp" + "_" + "$BUILD_VERSION" + "_" + "$BUILD_TIMESTAMP" + ".zip"
+				NAME='TimeIPWebApp'
+				UNDERS='_'
+				FILE=$NAME$UNDERS$BUILD_TIMESTAMP$UNDERS$BUILD_VERSION.zip
 				zip -r $FILE TimeIPWebApp
 				curl -uadmin:AP4yfeptHCJX84gEtWXZ8TjRYQQ -T $FILE "http://dockercentos:8081/artifactory/generic-local/$FILE"
 				'''
