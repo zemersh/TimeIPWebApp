@@ -44,7 +44,7 @@ pipeline {
 				'''
 				cd /home/zemersh/docker/jenkins/jenkins_home/workspace/TimeIPWebApp/
 				BUILD_VERSION=$(node -pe "require('./package.json').version")
-				docker build . --tag forcepoint/time-ip-web-app:$BUILD_VERSION
+				docker build . --tag forcepoint/time-ip-web-app:${BUILD_VERSION}
 				'''
 				, execTimeout: 300000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 			}
