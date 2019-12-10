@@ -23,7 +23,7 @@ pipeline {
 		}
 		stage ('Create Artifactory and sending it to management server') {
 			steps {
-				sh '$BUILD_VERSION = node -pe "require('./package.json').version"
+				sh '$BUILD_VERSION = node -pe "require('./package.json').version"'
 				sh 'echo $BUILD_VERSION'
 				sh 'echo $BUILD_TIMESTAMP'
 				sshPublisher(publishers: [sshPublisherDesc(configName: 'dockercentos', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 
