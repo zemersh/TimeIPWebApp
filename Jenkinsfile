@@ -34,6 +34,7 @@ pipeline {
 				FILE=$NAME$UNDERS$BUILD_TIMESTAMP$UNDERS$BUILD_VERSION.zip
 				zip -r $FILE TimeIPWebApp
 				curl -uadmin:AP4yfeptHCJX84gEtWXZ8TjRYQQ -T $FILE "http://dockercentos:8081/artifactory/generic-local/$FILE"
+				rm $FILE
 				'''
 				, execTimeout: 300000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 			}
@@ -64,9 +65,8 @@ pipeline {
 		}
 		stage ('kubectl pod creation') {
 			steps {
-				sshPublisher(publishers: [sshPublisherDesc(configName: 'dockercentos', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'DESKTOP-PCC2HH5', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 
 				'''
-				sshpass -p 1qaz2wsx ssh  me@DESKTOP-PCC2HH5
 				kubectl delete deployment time-ip-web-app
 				kubectl delete services time-ip-web-app
 				kubectl create deployment time-ip-web-app --image=forcepoint/time-ip-web-app:1.1.3
