@@ -68,7 +68,8 @@ pipeline {
 				'''
 				sshpass -p 1qaz2wsx ssh  me@DESKTOP-PCC2HH5
 				kubectl delete deployment time-ip-web-app
-				kubectl create deployment time-ip-web-app --image=forcepoint/time-ip-web-app:latest
+				kubectl delete services time-ip-web-app
+				kubectl create deployment time-ip-web-app --image=forcepoint/time-ip-web-app:1.1.3
 				kubectl expose deployment time-ip-web-app --type=NodePort --port=8090
 				minikube service time-ip-web-app
 				'''
