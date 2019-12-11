@@ -64,8 +64,10 @@ pipeline {
 		}
 		stage ('kubectl pod creation') {
 			steps {
-				sshPublisher(publishers: [sshPublisherDesc(configName: 'DESKTOP-PCC2HH5', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'dockercentos', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 
 				'''
+				sshpass -p 1qaz2wsx ssh  me@DESKTOP-PCC2HH5
+				kubectl delete deployment time-ip-web-app
 				kubectl create deployment time-ip-web-app --image=forcepoint/time-ip-web-app:latest
 				kubectl expose deployment time-ip-web-app --type=NodePort --port=8090
 				minikube service time-ip-web-app
