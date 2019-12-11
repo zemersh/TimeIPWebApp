@@ -38,13 +38,37 @@ pipeline {
 				, execTimeout: 300000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 			}
 		}
-		stage ('Build TimeIPWebApp Image') {
+		stage ('Build TimeIPWebApp Image and send to minikube') {
 			steps {
 				sshPublisher(publishers: [sshPublisherDesc(configName: 'dockercentos', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 
 				'''
 				cd /home/zemersh/docker/jenkins/jenkins_home/workspace/TimeIPWebApp/
 				docker build . --tag forcepoint/time-ip-web-app:$(node -pe "require('./package.json').version")
 				docker tag forcepoint/time-ip-web-app:$(node -pe "require('./package.json').version") forcepoint/time-ip-web-app:latest
+				cd /home/zemersh/
+				docker save forcepoint/time-ip-web-app > time-app.tar
+				scp /home/zemersh/time-app.tar docker@minikube:/home/docker
+				'''
+				, execTimeout: 300000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+			}
+		}
+		stage ('load image to minikube') {
+			steps {
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'minikube', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 
+				'''
+				cd /home/docker/
+				docker load < time-app.tar
+				'''
+				, execTimeout: 300000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+			}
+		}
+		stage ('kubectl pod creation') {
+			steps {
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'DESKTOP-PCC2HH5', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 
+				'''
+				kubectl create deployment time-ip-web-app --image=forcepoint/time-ip-web-app:latest
+				kubectl expose deployment time-ip-web-app --type=NodePort --port=8090
+				minikube service time-ip-web-app
 				'''
 				, execTimeout: 300000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 			}
